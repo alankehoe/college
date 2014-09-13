@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <meta name="Author" content="David Sinclair">
+  <meta name="GENERATOR" content="Mozilla/4.79 [en] (WinNT; U) [Netscape]">
+  <title>CA547 Cryptography and Security Protocols</title>
+</head>
+<body style="tab-interval:36.0pt" lang="EN-IE">
+
+<div class="Section1">
+<center>
+<h1>CA547 Cryptography and Security Protocols</h1>
+
+<h2>Assignment 1</h2>
+
+</center>
+
+        <p align="center"><strong><font size="5"><u>Symmetric File Encryption Using Password and Salt</u></font></strong></p>
+        <p><br>
+          The aim of this assignment is to perform symmetric encryption of a file using the block cipher AES
+          where the key is derived from a <i>password</i> and a <i>salt</i>.</p>
+
+        <p>The password you use should be encoded using UTF-8 and be considered to be "strong". The salt will be a randomly 
+           generated 128-bit value. The password (<i>p</i>) and salt (<i>s</i>) will be concatenated together 
+           (<i>p||s</i>) and hashed 200 times using SHA-256. The resulting digest (<i>H<sup>200</sup>(p||s)</i>) 
+           will then be used as your 256-bit AES key (<i>k</i>).</p>
+          
+        <p>You will then encrypt an input file using AES in CBC mode with the 256-bit key <i>k</i> and a block 
+           size of 128-bits. The IV for this encryption (<i>i</i>) will be a randomly generated 128-bit value.
+           You will use the following padding scheme (as given in lectures): if the final part of the message is 
+           less than the block size, append a 1-bit and fill the rest of the block with 0-bits; if the final part
+           of the message is equal to the block size, then create an extra block starting with a 1-bit and fill 
+           the rest of the block with 0-bits.</p>
+
+        <p>You will then encrypt your password using RSA with the encryption exponent (<i>e</i>) and my public modulus (<i>N</i>).
+           This is done by calculating <i>p<sup>e</sup></i> (mod <i>N</i>). This will use your own implementation 
+           of modular exponentiation rather than a library method for this purpose. For the purpose of this assignment 
+           no padding should be added to the password before encryption (although this would normally be done).</p>
+
+        <p>The encryption exponent (<i>e</i>) is 65537 and my public modulus (<i>N</i>) has the following value (in hexadecimal):</p>
+  
+        <p><tt>c406136c 12640a66 5900a9df 4df63a84 fc855927 b729a3a1 06fb3f37 9e8e4190<br>
+           ebba442f 67b93402 e535b18a 5777e649 0e67dbee 954bb021 75e43b64 81e7563d<br>
+           3f9ff338 f07950d1 553ee6c3 43d3f814 8f71b4d2 df8da7ef b39f846a c07c8652<br>
+           01fbb35e a4d71dc5 f858d9d4 1aaa856d 50dc2d27 32582f80 e7d38c32 aba87ba9</tt></p>
+
+        <p>The implementation language must be Java. You will have to make use of the BigInteger class (java.math.BigInteger),
+           the security libraries (java.security.*) and the crypto libraries (javax.crypto.*). 
+           You must not make use of the modular exponentiation method provided by the BigInteger class; 
+           all modular exponentiation must be done using one of the two methods described in the lectures.
+           You can however make use of the security and crypto libraries to perform the AES encryption and 
+           the SHA-256 hashing.</p>
+
+        <p>You should send me the following by email:
+        </p><ul>
+          <li>Your 128-bit salt (<i>s</i>) in hexadecimal.</li>
+          <li>Your 128-bit IV (<i>i</i>) in hexadecimal.</li>
+          <li>Your password encrypted using RSA as described above in hexadecimal.</li>          
+          <li>An unencrypted version of your code.</li>
+          <li>Your code encrypted using AES as described above in hexadecimal.</li>
+          <li>A declaration that this is solely your own work (except elements that are explicitly attributed to another source).</li>
+        </ul>When I receive your email I will decrypt your password <i>p</i> using my RSA private key. 
+             Using this password and your salt <i>s</i> I will then generate your AES key <i>k</i> using SHA-256. 
+             I will then use this to decrypt the encrypted version of your code. 
+             This should be the same as the unencrypted version of your code for a correct submission.<p></p>
+
+        <p> This assignment is due <b>10am on Monday 18<sup>th</sup> November.
+        <strong><u>Submissions without the declaration will not be assessed.</u></strong> 
+          This assignment carries 15 marks and late submissions will have 
+          1.5 marks deducted for each 24 hours the assignment is overdue.</b></p><b>
+</b></div><b>
+
+
+</b></body></html>

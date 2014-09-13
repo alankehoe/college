@@ -1,0 +1,44 @@
+<navbar></navbar>
+
+<div class="container">
+
+    <gauges></gauges>
+
+    <div class="row" ng-controller="CorrelationsCtrl">
+        <div class="bs-callout bs-callout-info">
+            <div>
+                <p style="word-break: break-all;"><strong>Correlation between Diesel and Oil:</strong>
+                    {{ correlations.correlation_diesel }}</p>
+
+                <p style="word-break: break-all;"><strong>Correlation between Petrol and Oil:</strong>
+                    {{ correlations.correlation_petrol }}</p>
+            </div>
+            <br>
+            <ul>
+                <li>1 is a perfect positive correlation</li>
+                <li>0 is no correlation (the values don't seem linked at all)</li>
+                <li>-1 is a perfect negative correlation</li>
+            </ul>
+        </div>
+    </div>
+
+    <div ng-controller="myctrl">
+        <div class="row">
+            <highchart id="chart1" config="chartConfig"></highchart>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="bs-callout bs-callout-warning">
+            <ul>
+                <li>Petrol and Diesel prices are euro per litre</li>
+
+                <li>Oil price is us dollar per litre</li>
+
+                <li>Oil price is calculated as ( barrel price usd / 159)</li>
+
+                <li>159 litres in a barrel of oil</li>
+            </ul>
+        </div>
+    </div>
+</div>

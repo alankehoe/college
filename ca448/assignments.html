@@ -1,0 +1,294 @@
+<table border="3" width="94%">
+  <tbody>
+    <tr> 
+      <td valign="top"> <center>
+          <b><font size="+3">CA448 Compiler Construction 1 Assignments<br>
+          </font></b> 
+        </center>
+        <p><br>
+          <br>
+          &nbsp; <br>
+          &nbsp; <br>
+          &nbsp; <br>
+          &nbsp; </p>
+        <center>
+          <table border="1" cols="2" width="100%">
+            <tbody>
+              <tr> 
+                <td> <center>
+                    <a
+ href="http://www.computing.dcu.ie/%7Edavids/courses/CA448/CA448.html">Course Notes</a></center></td>
+                <td style="color: rgb(51, 0, 51); text-align: center;"> <span
+ style="font-weight: bold;">Assignments</span><br> </td>
+              </tr>
+            </tbody>
+          </table>
+        </center>
+        <br> &nbsp; <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr> 
+              <td style="vertical-align: top; text-align: center;"><a
+ href="#assignment_1">Assignment 1</a><br> </td>
+              <td style="vertical-align: top; text-align: center;"><a
+ href="#assignment_2">Assignment 2</a><br> </td>
+              <td style="vertical-align: top; text-align: center;"><a
+ href="#repeat">Resit</a><br> </td>
+            </tr>
+          </tbody>
+        </table>
+        <center>
+        </center>
+        <br> 
+        <div style="text-align: center;"><font size="5"><strong><u><a
+ name="assignment_1"></a>Assignment 1</u></strong></font><br>
+        </div>
+<center>
+<p><b><font color="#ff0000" size="+2">Assignment 1: A Lexical Analyser for the ImpCA Language</font></b></p>
+</center>
+</center>
+<h3>Aim</h3>
+
+<p>The aim of this assignment is to implement a lexical analyser using JavaCC for a simple language
+called ImpCA.
+
+<P><b>This assignment is worth 10% of the overall marks for this course</b>. It is an individual
+assignment. Submissions will be checked very closely for signs of plagiarism,
+for which <u><b>strict</b></u> penalties apply.</P>
+
+
+<h3>Lexical Analyser</h3>
+
+Case is insignificant in the ImpCA langauge.
+The lexical analyser should recognise the following tokens:
+
+<p>
+<b>keywords</b>: and, begin, boolean, const,
+  do, else, end, false, if, integer, main, not, or, program, real, return, string, then, true, var, void, while.
+</p>
+
+<p>
+<b>identifiers</b>: Any other string of letters, digits or underscore character ('_') beginning with a letter.
+</p>
+
+<p>
+<b>strings</b>: As in C string are delimited by double quotes. Strings 
+  may contain any alphanumeric found on a standard keyboard or punctuation 
+  characters listed below. Strings may contain quotes, backslashes or 
+  newlines only if escaped by a backslash.
+</p>
+
+<p>
+<b>numbers</b>: A string of (decimal) digits. Real numbers are represented by a string of digits, a period
+  character "." and a string of digits. Examples of valid numbers are 123, 0.123 and 1.23. Numbers such
+  as 123. and .123 are invalid.
+</p>
+
+<p>
+<b>operators, relations and punctuation marks</b>:
+  +&nbsp; -&nbsp; *&nbsp; /&nbsp; %&nbsp; =&nbsp; !=&nbsp; &lt;&nbsp; &gt;&nbsp;
+  &lt;=&nbsp; &gt;=&nbsp; (&nbsp; )&nbsp; ,&nbsp; ;&nbsp; :&nbsp; .&nbsp; :=&nbsp; ?&nbsp; !
+</p>
+
+<p>Comments in ImpCA can appear between any two tokens and start with "/-" and
+   end with "-/". Comments can be nested.
+</p>
+
+<h3>Submission</h3>
+
+<p>You should submit, by email to David.Sinclair@computing.dcu.ie, all 
+   the source files (JavaCC file and other files which were used to generate 
+   your parser) in a Winzip file along with a brief description of each 
+   of the major components of your lexiscal analyser describing how you 
+   implemented them and justifying why you implemented them in the way 
+   you did, by <b>10am on Monday 11<sup>th</sup> November</b>. The assignment 
+   carries 10 marks and <b>late submissions will incur a 1 mark penalty 
+   for each 24 hours after the submission</b>.<br>
+</p>
+
+<p><b><font size="4">Sample ImpCA files</font></b></p>
+<p><a href="http://www.computing.dcu.ie/%7Edavids/courses/CA448/squares.imp">squares.imp</a></p>
+<p><a href="http://www.computing.dcu.ie/%7Edavids/courses/CA448/example.imp">example.imp</a></p>
+<p><b><font size="4">Sources of Information on JavaCC</font></b></p>
+<p><a href="http://javacc.dev.java.net">JavaCC Homepage</a></p>
+<p><a href="http://ctp.di.fct.unl.pt/javacc/">JavaCC Documentation Page</a></p>
+<p><a href="http://www.idevelopment.info/data/Programming/java/JavaCC/The_JavaCC_FAQ.htm">The JavaCC FAQ</a></p>
+
+
+      
+        </div>
+        <div>
+<hr style="width: 100%; height: 2px;">
+		<br> <br> 
+          <div><big style="font-weight: bold; text-decoration: underline;"> <big><a name="assignment_2"></a>
+		  <center><font size="+2">Assignment 2</font></center></big></big></div>
+
+<p><center><b><font color="#ff0000" size="+2">Assignment 2: A Top-Down Parser with Semantic Analysis for the ImpCA Language</font></b></center></p>
+
+<h3>Aim</h3>
+<p>The aim of this assignment is to add a parser and semantic analysis checks 
+   to the lexical analyser you have implement for the simpL language as Assignment 1.
+   <b>This assignment is worth 15% of the overall marks for this course</b>. It is
+   an individual assignment. Submissions will be checked very closely for signs of
+   plagiarism, for which <u><b>strict</b></u> penalties apply. The parser must be
+   implemented using JavaCC.
+</p>
+
+<p>The syntax analyser should recognise the language described by the following grammar. Tokens are represented the
+<font face="Arial">Arial font</font>. <i>Italicised font</i> represents non-terminals. Bold parentheses <b>( )</b> are used for grouping.
+Bold curly braces <b>{ }</b> indicate optional items. The vertical bar | represents alternation ("or"). A Kleene star <b>*</b> indicates that the
+preceding item can be repeated zero or more times and a <b>+</b> indicates that the
+preceding item can be repeated one or more times. Epsilon <font face="Symbol">&#949;</font>&nbsp; denotes the empty string.</p>
+
+<p>
+<i>program</i> := <b>(</b> <i>decl</i> <b>)*</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>(</b> <i>function</i> <b>)*</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>main_prog</i><br>
+<br>
+
+<i>decl</i> := <b>( </b> <i>var_decl</i> | <i>const_decl</i> <b>)* </b><br>
+<br>
+
+<i>var_decl</i> := <font face="Arial"> var </font><font face="Times New Roman"><i>ident_list</i>:<i>type</i></font>
+<font face="Arial"> <b>(</b> ,<b> </b></font><font face="Times New Roman"><i>ident_list</i>:<i>type </i></font><font face="Arial"> <b>)</b></font><font face="Times New Roman">*</font>
+<font face="Arial"> ; </font><br>
+<br>
+
+<i>const_decl</i> := <font face="Arial">const identifier:<i><font face="Times New Roman">type</font></i> = <i><font face="Times New Roman">expression</font></i> <b>(</b> , identifier:<i><font face="Times New Roman">type</font></i> = <i><font face="Times New Roman">expression</font></i> <b>)</b></font><font face="Times New Roman">*</font><font face="Arial"> ;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+
+<i>function</i> :=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<i>type</i> <font face="Arial">identifier</font> <font face="Arial">(</font> <i>param_list</i> <font face="Arial">)</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>( </b> <i>decl</i> <b>)* </b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>( </b> <i>statement</i> <font face="Arial">;</font> <b>)* </b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font face="Arial">return</font> <b>( </b> <i>expression</i> | <font face="Symbol">&#949;</font>&nbsp; <b>)</b> ;<br>
+<br>
+
+
+<i>param_list</i><font face="Symbol"> := <b>(</b> <font face="Arial">identifier:</font><font face="Times New Roman"><i>type</i> <b>(</b></font><font face="Arial"> , </font>
+<font face="Arial">identifier:</font><i><font face="Times New Roman">type</font></i><font face="Times New Roman"> <b>)</b>*</font> | <font face="Symbol">&#949;</font>&nbsp; <b>)</b><br>
+<br>
+
+<i>type</i> </font><font face="Symbol">:=</font><font face="Times New Roman"> </font> <font face="Arial">integer</font>
+<font face="Times New Roman"> | </font> <font face="Arial">boolean</font><font face="Times New Roman"> | </font> <font face="Arial">real</font><font face="Times New Roman"> | </font> <font face="Arial">string</font> |
+</font> <font face="Arial">void</font><br>
+<br>
+
+<i>main_prog</i> :=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font face="Arial">main</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>( </b> <i>decl</i> <b>)* </b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>( </b> <i>statement</i> <font face="Arial">;</font> <b>)* </b><br>
+<br>
+
+
+
+<i>statement</i><font face="Symbol"> := </font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font face="Times New Roman"></font><font face="Arial">identifier := </font> <i>expression</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">identifier</font><font face="Arial"> := string</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">!</font><i><font face="Times New Roman">expression</font></i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">?identifier</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">identifier (</font> <i>arg_list</i> <font face="Arial">)</font> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">begin </font><font face="Times New Roman"><b>(</b> <i>statement</i> <font face="Arial">;</font> <b>)</b>+ </font><font face="Arial">end</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">if</font><font face="Times New Roman"> <i>condition</i></font> <font face="Arial">then</font><font face="Times New Roman"> <i>statement</i></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">if</font><font face="Times New Roman"> <i>condition</i></font> <font face="Arial">then</font><font face="Times New Roman"> <i>statement </i></font>
+<font face="Arial">else</font><font face="Times New Roman"> <i>statement</i></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Arial">while</font><font face="Times New Roman"> <font face="Arial">(</font> <i>condition</i> <font face="Arial">)</font> <font face="Arial">do</font><font face="Times New Roman"> <i>statement</i></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <font face="Symbol">&#949;</font> <br>
+<br>
+
+<i>expression</i><font face="Symbol"> := </font><font face="Times New Roman"><i>fragment</i> <b>( (</b> <font face="Arial">+</font> | <font face="Arial">-</font> | <font face="Arial">*</font> | 
+<font face="Arial">/</font> <b>)</b>&nbsp; <i>fragment<b> </b></i><b>)</b>*</font><br>
+<br>
+
+<i>fragment</i> </font><font face="Symbol"> := </font><font face="Arial">identifier</font><font face="Times New Roman"> | </font> <font face="Arial">number</font>
+<font face="Times New Roman"> | <b>( </b><font face="Arial">+</font> | <font face="Arial">-</font> <b>)</b> <i>fragment</i> | <i>expression</i></font><br>
+<br>
+
+<i>condition</i> </font><font face="Symbol"> := <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font face="Times New Roman">&nbsp;&nbsp; </font><font face="Arial">not </font><font face="Times New Roman"><i>expression</i></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| <i>expression</i> <b>(</b> <font face="Arial">=</font> | <font face="Arial">!=</font> | <font face="Arial">&lt;</font> | <font face="Arial">&gt;</font> | <font face="Arial">&lt;=</font> | 
+<font face="Arial">&gt;=</font> <b>&nbsp;| </b></font> <font face="Arial">and</font><font face="Times New Roman"><b>&nbsp;| </b></font>
+<font face="Arial">or</font><font face="Times New Roman"><b>) </b> <i>expression</i></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| </font></i><font face="Arial">identifier</font><font face="Times New Roman"> </font><br>
+<br>
+
+<i>ident_list</i> := <font face="Times New Roman"> </font> <font face="Arial">identifier</font> <b>(</b> <font face="Arial">,</font> <font face="Arial">identifier</font>
+<font face="Times New Roman"><i> </i><b>)</b>*</font><br>
+<br>
+
+<i>arg_list</i> := <b>( </b> <font face="Arial">identifier</font> <b>(</b> , </font> <font face="Arial">identifier</font> <b>)</b>* | <font face="Symbol">&#949;</font>&nbsp; <b>)</b><br>
+<br>
+
+<p>The <font face="Arial">?</font> operator reads from the standard input and stores the value in a variable, i.e. <font face="Arial">?x</font>. 
+The <font face="Arial">!</font> operator evaluates an expression and outputs the value to the standard output.
+</p>
+
+<p>In order to perform the following semantic checks on a ImpCA source file you will have to extend your compiler from
+Assignment 1 by adding a symbol table and building an abstract syntax tree (AST) for the program you are compiling. Using the symbol table
+and the AST your compiler should perform the following semantic checks.</p>
+<ul>
+<li>Is every identifier declared within scope before its is used?</li>
+<li>Is no identifier declared more than once in the same scope?</li>
+<li>Is the left-hand side of an assignment a variable of the correct type?</li>
+<li>Are the arguments of an arithmetic operator the integer or real variables, or integer or real constants?</li>
+<li>Are the arguments of a boolean operator boolean variables or boolean constants?</li>
+<li>Is there a function for every invoked identifier?</li>
+<li>Does every function call have the correct number of arguments?</li>
+<li>Is every variable both written to and read from?</li>
+<li>Is every function called?</li>
+</ul>
+<p>Feel free to add any additional semantic checks you can think of.</p>
+
+
+<h3>Submission</h3>
+
+<p>You should submit, by email to David.Sinclair(at)computing.dcu.ie, all 
+   the source files (JavaCC file and other files which were used to generate 
+   your parser) in a Winzip file along with a description of your abstract 
+   syntax tree structure and symbol table, how you implemented them and 
+   how you implemented the semantic checking, by <b>10am on Monday 16<sup>th</sup> 
+   December</b>. Your description should also include any suggestions 
+   you may have to improve the ImpCA language. The assignment carries 
+   20 marks and <b>late submissions will incur a 2 mark penalty for each 
+   24 hours after the submission</b>.
+</p>
+
+<!--
+<p>The results for both assignments are available <a href="http://www.computing.dcu.ie/%7Edavids/courses/CA448/CA448_2013_CA.html">here</a>.
+</p>
+-->
+
+
+	<hr style="width: 100%; height: 2px;"> 
+        <a name="repeat"></a> <center>
+            <b><u><font size="+2">CA448 Compiler Construction 1 Resit Assignment</font></u></b> 
+          </center>
+        <br>
+      <p align="center">
+        <b><font color="#ff0000" size="+2">To be announced</font></b>
+      </p>
+      </div></td>
+    </tr>
+  </tbody>
+</table>

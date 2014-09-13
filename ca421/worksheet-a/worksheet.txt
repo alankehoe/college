@@ -1,0 +1,43 @@
+DCU – CA421 Software Patterns & Metrics
+Worksheet A:
+The Adapter Pattern The Observer Pattern
+This week we look at some applications of the Adapter & Observer Patterns
+
+• QUESTION 1 – Convert Turkeys to Ducks
+Try the example from the notes of adapting a Turkey to a Duck.
+
+• QUESTION 2 – Convert an Enumeration to an Iteration
+Create a Vector of a bunch of integers. The extract an Enumerator from the Vector
+(check the API for how to do this). Then use an adapter to convert this Enumerator
+into an Iterator. Finally, move through the Iterator, printing up each number.
+
+• QUESTION 3 – Should I Do It?
+Implement and test the simple “Should I Do It?” question from the notes on the
+Observer pattern.
+
+• QUESTION 4 – Dunno
+Add another listener to the button from question 1. This time the listener should print
+the message “I don’t know!”.
+
+• QUESTION 5 – Dunno just three times.
+Modify question 2 so that the “I don’t know!” listener is removed after three clicks on
+the button.
+
+• QUESTION 6 - Threads
+Implement and test a simple threaded application which has two threads, each of
+which prints a message 100 times. The first thread should print “hello” and the second
+thread should print “goodbye”.
+
+• QUESTION 7 – Threads with Weather
+Implement and test a simple Weather application which generates random
+temperature, pressure and humidity in a thread, in random intervals ranging from 5 to
+15 seconds. The Weather subject should allow observers to attach and detach
+themselves. Allow the Weather subject to notify observers. The observers should then
+be able to retrieve the data they want (i.e. using the ‘Pull’ method).
+Add three listeners:
+(1) Snow listener: Prints a warning message when the temperature drops
+below 3 degrees and the humidity is above 75%.
+(2) Heatwave listener: Prints a warning when the temperature is above 35
+degrees.
+(3) InSpace listener: Prints a warning when the pressure drops below 10.
+What changes would be required to your design to use the ‘Push’ method?

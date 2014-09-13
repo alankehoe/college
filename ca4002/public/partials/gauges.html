@@ -1,0 +1,34 @@
+<div class="row" ng-controller="GaugeController" ng-init="init()">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">Petrol</h3></div>
+            <div class="panel-body">
+                <div class="gauge">
+                    <pie-chart data="diesel_data" options="diesel_options"></pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">Diesel</h3></div>
+            <div class="panel-body">
+                <div class="gauge">
+                    <pie-chart data="petrol_data" options="petrol_options"></pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">Crude Oil</h3></div>
+            <div class="panel-body">
+                <div class="gauge">
+                    <pie-chart data="oil_data" options="oil_options"></pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

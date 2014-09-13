@@ -1,0 +1,6 @@
+/- Simple test file for ImpCA language -/
+
+real square (x:real)
+   return x +;
+main
+end

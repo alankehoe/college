@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2569398199">
+    <data-source source="LOCAL" name="Rails ca4002-api: development" uuid="67058d5d-88ed-4fef-bf4a-7cab96d97686">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails ca4002-api: production" uuid="cb53f558-408d-4df9-829d-0493d3745b9f">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://mysql.raven.com:3306/ca4002</jdbc-url>
+      <user-name>fleet</user-name>
+      <user-password>dfe8dff9dfd9dfefdfe9dffbdf92dfcfdfe2dfdfdf9edfecdfd0dff2dffedf9f</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

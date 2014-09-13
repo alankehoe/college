@@ -1,0 +1,49 @@
+Design Patterns Project
+Introduction
+The purpose of the project is to encourage you to explore and understand the patterns discussed in the course. So your goal is to use the features of the language correctly and appropriately. The language of implementation is C++ or Java or another object-oriented language. While design patterns and examples are publicly available your example implementation must be your own work and full references must be made to all websites used, books and articles read.
+
+Contents - Steps
+0. The assignment must be based on taking an object-oriented "pattern" and developing it into a working example set of classes. In other words create a small application to try out a pattern. Gang of Four or Architectural Patterns would be good candidates.
+
+1. Develop 4 or more classes up to a canonical class standard. (see link)
+
+2. The area of application is open to you but beware of "database-type" applications as they often involve a lot of repetition
+
+.("database-type" applications: projects that spend most of their time on input and output of data for objects with little regard for operations, a set of classes representing different cars/boats/vehicles would be bad examples for this assignment)
+
+Also the pattern CANNOT JUST be FACTORY, SINGLETON,ADAPTER or FACADE or any of the simple "patterns" (really idioms) of Lethbridge as these are too simple on their own. If you use multiple (3+) patterns then it may be okay to have one or two of them simple.
+
+3. Link some of the classes appropriately using inheritance.
+
+4. Use the features of the language (such as for C++: Templates, friends, virtual, iterators, abstract classes) , (for java interfaces, exceptions, dictionaries etc.) to develop 5 or more member functions per class.
+
+5. I would recommend that you take an aspect of your final year project and try out a pattern solution for it. Use the assignment as a chance to research a small part of the project - you can obviously throw away the code but you will have gained through the investigation. Thus you would get a double benefit for the work. Please do not submit your entire final year project as the coursework for this module.
+
+6. Do not panic if you cannot see how patterns could fit into your final year project. Talk to me first - then panic :-)
+
+7. Provide:
+
+A simple web page containing the following: ( all of these linked to main page and stored in .html or image files NOT .docs or .pdf )
+At least an A4 page Design Description of how your pattern works
+A UML class diagram
+Proper UML Sequence Diagram. Show the message sends between your core pattern objects.
+Commented code
+Sample input/output session. Screen shots; Java Console or executable.
+You must reference all websites books or articles used.
+Create a html document called exactly ca421project.html in your unix directory ../public_html/ and make it readable by me on the due date.
+Ensure that this is set up correctly for access. Check it yourself from an external machine. Check access protections on directories and files. It is your responsibility to get this working.
+For example: http: //student.computing.dcu.ie/~Your-login-name /ca421project.html
+
+The name must be set up like this as it will be read by a script and it is your responsibility to get it right.
+
+Because of web access projects MUST be delivered on time.
+
+There will be a 50% penalty for 2 days delay and they will not be accepted after one week.
+
+Marks: 20% of total module.
+
+The remaining 5% for the coursework component of this module will be allocated for your work on a randomly chosen worksheet (worksheets will be available soon).
+
+Due Date and Time:
+
+Friday December 20th, 2013, 11pm.

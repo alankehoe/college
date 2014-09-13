@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+class Compiler
+
+  def compile
+    @spec_dir = "spec"
+    @bin_dir = "bin"
+    @file = ARGV[0]
+    
+    create_dir(@bin_dir)
+
+    puts 'Cleaning Directory'
+    `rm #{@bin_dir}/*.class`
+    `rm #{@bin_dir}/*.java`
+
+    puts "Compiling #{@file} with javacc"
+    `javacc #{@file}`
+    
+    puts 'Compiling java files'
+    
+    `javac *.java`
+
+    puts "Run against sample launguage '#{@spec_dir}/squares.imp'"
+    puts `java Lexer #{@spec_dir}/squares.imp`
+    puts "\n\n\n\n\n\n\n\n"
+    
+    puts "Run against sample launguage '#{@spec_dir}/example.imp'"
+    puts `java Lexer #{@spec_dir}/example.imp`
+    puts "\n\n\n\n\n\n\n\n"
+
+    puts "Move files to #{@bin_dir}"
+    `mv *.java #{@bin_dir}/`
+    `mv *.class #{@bin_dir}/`
+  end
+  
+  
+  private 
+
+  def create_dir(directory)
+    if File.directory?(directory)
+      puts "Directory #{directory} already exists"
+    else
+      FileUtils.mkdir directory
+      puts "Created directory #{directory}"
+    end
+  end
+end
+
+compiler = Compiler.new
+compiler.compile

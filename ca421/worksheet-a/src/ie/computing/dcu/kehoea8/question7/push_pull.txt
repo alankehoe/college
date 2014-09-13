@@ -1,0 +1,7 @@
+In order for me to change the observable model from pull to push, I would need to change the following things.
+
+1) I would need to send the data along with the update method, whereas in the pull model I just call
+    update and the observer can do whatever it wants with the observable object
+
+N.B The pull method is nice in the way it allows each observer to get whatever publicly available data it
+    wants to access.

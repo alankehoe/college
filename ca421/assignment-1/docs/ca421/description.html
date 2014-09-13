@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Alan Kehoe - 10735389</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        .block {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="block">
+    <h1>How it works</h1>
+    My program implements the Observer Pattern, Decorator Pattern and the Singleton Pattern.
+    I have implemented a simple hospital system in which you can have a patient and also hook that patient
+    up to a monitor. There are two monitors
+    <ol>
+        <li>Heart Rate Monitor</li>
+        <li>Body Temperature Monitor</li>
+    </ol>
+    A patient is a Singleton object that implements the Person interface. When a patient is
+    created monitors can be attached to that patient. The monitors implement the pull method of an observer
+    this means that they can do with the data what they want they both have an update method which can be called from
+    the Patient object. When the observers receive the data they can either do nothing or give the patient some
+    medicine.
+
+    I also implemented the Decorator pattern in this program. The Decorator is used to create a prescription for the
+    user.
+    there is an initial fee for each medicine and the decorator can add to this when creating the prescription.
+    there are two types of medicine.
+    <ol>
+        <li>Heart Medicine</li>
+        <li>Body Temperature Medicine</li>
+    </ol>
+
+    <h1>Patterns implemented in this program</h1>
+    <ol>
+        <li>Observer (Pull model)</li>
+        <li>Decorator</li>
+        <li>Singleton</li>
+    </ol>
+</div>
+
+</body>
+<html>

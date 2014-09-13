@@ -1,0 +1,222 @@
+// Alan Kehoe 10735389
+
+options{
+
+/* Code to set various options flags */
+
+}
+
+PARSER_BEGIN(Lexer)
+
+public class Lexer {
+
+	public static void main(String [] args) {
+		Lexer lexer;
+		
+		if (args.length == 0) {
+			System.out.println("Reading from standard input . . .");
+			lexer = new Lexer(System.in);
+		} else if (args.length == 1) {
+			try {
+				lexer = new Lexer(new java.io.FileInputStream(args[0]));
+			} catch (java.io.FileNotFoundException e) {
+				System.err.println("File " + args[0] + " not found.");
+				return;
+			}
+		}
+		
+		for (Token t = getNextToken(); t.kind!=EOF; t = getNextToken()) {
+			if(t.kind == PUNCTUATION) {
+				System.out.printf("%-15s%-15s", "Punctuation", t.image);
+				System.out.println("");
+			} else if (t.kind == AND) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == BEGIN) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == BOOLEAN) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == CONST) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == DO) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == ELSE) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == END) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == FALSE) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == IF) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == INTEGER) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == MAIN) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == NOT) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == OR) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == PROGRAM) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == REAL) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == RETURN) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == STRING) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == THEN) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == TRUE) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == VAR) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == VOID) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == WHILE) {
+				System.out.printf("%-15s%-15s", "Keyword", t.image);
+				System.out.println("");
+			} else if (t.kind == NUM) {
+				System.out.printf("%-15s%-15s", "Number", t.image);
+				System.out.println("");
+			} else if (t.kind == ID) {
+				System.out.printf("%-15s%-15s", "Identifier", t.image);
+				System.out.println("");
+			} else if (t.kind == USER_STRING) {
+				System.out.printf("%-15s%-15s", "String", t.image);
+				System.out.println("");
+			} else if (t.kind == FAIL) {
+				System.out.printf("%-15s%-15s", "Not valid", t.image);
+				System.out.println("");
+			}			
+		}
+    }
+}
+
+PARSER_END(Lexer)
+
+TOKEN_MGR_DECLS :
+{
+	static int commentNesting = 0;
+}
+
+/* 
+	Ignore 
+	spaces, tabs, newlines, comments 
+*/
+SKIP :
+{
+	" "
+	| "\t"
+	| "\n"
+	| "\r"
+	| "\f"
+	| < "//" (~["\n"])* "\n" >
+}
+
+SKIP : /* COMMENTS */
+{
+	"/-" { commentNesting++; } : IN_COMMENT
+}
+
+<IN_COMMENT> SKIP :
+{
+	"/-" { commentNesting++; }
+	| "-/" { commentNesting--;
+		if (commentNesting == 0)
+			SwitchTo(DEFAULT);
+	}
+	| <~[]>
+}
+
+/* 
+	Punctuation 
+	+  -  *  /  %  =  !=  <  >  <=  >=  (  )  ,  ;  :  .  :=  ?  !
+*/
+TOKEN : 
+{
+	< PUNCTUATION : "+" | "-" | "*" | "/" | "%" | "=" | "!=" | "<" | "<=" | ">" | ">=" | "(" | ")" | "," | ";" | ":" | "." | ":=" | "?" | "!" >			
+}
+
+/* 
+	Keywords 
+	and, begin, boolean, const, do, else, end, false, if, integer, main, not, or, 
+	program, real, return, string, then, true, var, void, while
+*/
+TOKEN : 
+{
+    < AND : "and" >
+    | < BEGIN : "begin" >
+    | < BOOLEAN : "boolean" >
+    | < CONST : "const" >
+    | < DO : "do" >
+    | < ELSE : "else" > 
+    | < END : "end" >
+    | < FALSE : "false" >
+    | < IF : "if" >
+    | < INTEGER : "integer" >
+	| < MAIN : "main" >
+    | < NOT : "not" >
+    | < OR : "or" >
+    | < PROGRAM : "program" >
+    | < REAL : "real" >
+    | < RETURN : "return" >
+    | < STRING : "string" >
+    | < THEN : "then" >
+    | < TRUE : "true" >
+    | < VAR : "var" >
+    | < VOID : "void" >
+    | < WHILE : "while" > 
+}
+
+/* 
+	Numbers 
+	Examples of valid numbers are 123, 0.123 and 1.23. Numbers such as 123. and .123 are invalid
+
+	Identifiers
+	Any other string of letters, digits or underscore character ('_') beginning with a letter
+*/
+TOKEN : 
+{
+	< NUM : (<DIGIT>)+ | (<DIGIT>)+"."(<DIGIT>)+ >
+	| < #DIGIT : ["0" - "9"] >
+	| < ID : (<DIGIT> | <LETTER> | <UNDERSCORE>)* >
+	| < #LETTER : ["a" - "z", "A" - "Z"] >
+	| < #UNDERSCORE : ("_") >
+	| < #ESCAPE_ARTIST : ("\\" ("\"")) >
+}
+
+/*
+	User defined strings
+*/
+TOKEN :
+{
+	< USER_STRING :  "\"" (<DIGIT> | " " | <ESCAPE_ARTIST> | <LETTER> | <PUNCTUATION>)*  "\"" >
+}
+
+/* 
+	Anything not recognised so far 
+*/
+TOKEN :
+{
+	< FAIL : ~[] >
+}

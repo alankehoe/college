@@ -1,0 +1,495 @@
+<html>
+<head>
+    <title>Alan Kehoe - 10735389</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        .s0 {
+            color: rgb(204, 120, 50);
+        }
+
+        .s1 {
+            color: rgb(10, 11, 12);
+        }
+
+        .s2 {
+            color: rgb(98, 151, 85);
+        }
+
+        .s3 {
+            color: rgb(98, 151, 85);
+        }
+
+        .s4 {
+            color: rgb(104, 151, 187);
+        }
+
+        .s5 {
+            color: rgb(128, 128, 128);
+        }
+    </style>
+</head>
+
+<body>
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Main.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s0">import static </span><span class="s1">java.lang.Thread.sleep</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:02
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">Main {
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">InterruptedException {
+        </span><span class="s3">// Instantiate a new patient.</span><span class="s1">
+        Patient patient = Patient.getInstance(</span><span class="s4">&quot;Alan&quot;</span><span class="s0">, </span><span class="s4">&quot;Kehoe&quot;</span><span class="s0">, </span><span class="s5">23</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">float </span><span class="s1">medicalBill = (</span><span class="s0">float</span><span class="s1">) </span><span class="s5">0.0</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s3">// Assign the two monitor's</span><span class="s1">
+        HeartRateMonitor heartRateMonitor = </span><span class="s0">new </span><span class="s1">HeartRateMonitor(patient)</span><span class="s0">;</span><span class="s1">
+        CoreTemperatureMonitor coreTemperatureMonitor = </span><span class="s0">new </span><span class="s1">CoreTemperatureMonitor(patient)</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s3">// Simulate a patient being monitored for 20 seconds. Notifying monitors every 2 seconds</span><span class="s1">
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s5">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s5">10</span><span class="s0">; </span><span class="s1">i++) {
+            patient.notifyMonitors()</span><span class="s0">;</span><span class="s1">
+            sleep(</span><span class="s5">2000</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+        }
+
+        </span><span class="s3">// Print out all applied medicines and calculate bill.</span><span class="s1">
+        </span><span class="s0">for </span><span class="s1">(Prescription prescription : patient.getMedicine()) {
+            medicalBill += prescription.getPrice()</span><span class="s0">;</span><span class="s1">
+            System.out.println(</span><span class="s4">&quot;Medicine Name = &quot; </span><span class="s1">+ prescription.getName())</span><span class="s0">;</span><span class="s1">
+        }
+
+        </span><span class="s3">// Detach the monitors the patient is finished here</span><span class="s1">
+        patient.detatchMonitor(heartRateMonitor)</span><span class="s0">;</span><span class="s1">
+        patient.detatchMonitor(coreTemperatureMonitor)</span><span class="s0">;</span><span class="s1">
+
+        System.out.println(</span><span class="s4">&quot;Amount of monitors still attached &quot; </span><span class="s1">+ patient.getMonitors().size())</span><span class="s0">;</span><span class="s1">
+        System.out.println(</span><span class="s4">&quot;Total medical bill &quot; </span><span class="s1">+ medicalBill)</span><span class="s0">;</span><span class="s1">
+    }
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Monitor.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:53
+ */</span><span class="s1">
+
+</span><span class="s0">public interface </span><span class="s1">Monitor {
+    </span><span class="s0">public void </span><span class="s1">update()</span><span class="s0">;</span><span class="s1">
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            HeartRateMonitor.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:55
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">HeartRateMonitor </span><span class="s0">implements </span><span class="s1">Monitor {
+    Patient patient</span><span class="s0">;</span><span class="s1">
+
+    </span><span class="s3">// Instantiate the patient in the constructor</span><span class="s1">
+    </span><span class="s0">public </span><span class="s1">HeartRateMonitor(Patient patient) {
+        </span><span class="s0">this</span><span class="s1">.patient = patient</span><span class="s0">;</span><span class="s1">
+        </span><span class="s3">// Attach self to the patient</span><span class="s1">
+        </span><span class="s0">this</span><span class="s1">.patient.attachMonitor(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Override Monitor interface</span><span class="s1">
+    @Override
+    </span><span class="s0">public void </span><span class="s1">update() {
+        </span><span class="s0">int </span><span class="s1">age = patient.getAge()</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">int </span><span class="s1">heartRate = patient.getHeartRate()</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s3">// Check to see if the patient is ok and prescribe medicine if not</span><span class="s1">
+        </span><span class="s0">if </span><span class="s1">(heartRate &gt; </span><span class="s4">220 </span><span class="s1">- age) {
+            patient.addMedicine(</span><span class="s0">new </span><span class="s1">HeartRateMedicine(</span><span class="s0">new </span><span class="s1">Medicine()))</span><span class="s0">;</span><span class="s1">
+        } </span><span class="s0">else if </span><span class="s1">(heartRate &lt; </span><span class="s4">45 </span><span class="s1">&amp;&amp; heartRate &gt; </span><span class="s4">0</span><span class="s1">) {
+            patient.addMedicine(</span><span class="s0">new </span><span class="s1">HeartRateMedicine(</span><span class="s0">new </span><span class="s1">Medicine()))</span><span class="s0">;</span><span class="s1">
+        }
+    }
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            CoreTemperatureMonitor.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:55
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">CoreTemperatureMonitor </span><span class="s0">implements </span><span class="s1">Monitor {
+    Patient patient</span><span class="s0">;</span><span class="s1">
+
+    </span><span class="s3">// Instantiate the patient in the constructor</span><span class="s1">
+    </span><span class="s0">public </span><span class="s1">CoreTemperatureMonitor(Patient patient) {
+        </span><span class="s0">this</span><span class="s1">.patient = patient</span><span class="s0">;</span><span class="s1">
+        </span><span class="s3">// Attach self to the patient</span><span class="s1">
+        </span><span class="s0">this</span><span class="s1">.patient.attachMonitor(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Override Monitor interface</span><span class="s1">
+    @Override
+    </span><span class="s0">public void </span><span class="s1">update() {
+        </span><span class="s0">int </span><span class="s1">coreTemperature = patient.getCoreTemperature()</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s3">// Check to see if the patient is ok and prescribe medicine if not</span><span class="s1">
+        </span><span class="s0">if </span><span class="s1">(coreTemperature &gt; </span><span class="s4">40</span><span class="s1">) {
+            patient.addMedicine(</span><span class="s0">new </span><span class="s1">BodyTemperatureMedicine(</span><span class="s0">new </span><span class="s1">Medicine()))</span><span class="s0">;</span><span class="s1">
+        } </span><span class="s0">else if </span><span class="s1">(coreTemperature &lt; </span><span class="s4">35</span><span class="s1">) {
+            patient.addMedicine(</span><span class="s0">new </span><span class="s1">BodyTemperatureMedicine(</span><span class="s0">new </span><span class="s1">Medicine()))</span><span class="s0">;</span><span class="s1">
+        }
+    }
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Person.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:32
+ */</span><span class="s1">
+
+</span><span class="s0">public interface </span><span class="s1">Person {
+    </span><span class="s0">public int </span><span class="s1">getHeartRate()</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">public int </span><span class="s1">getAge()</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">public int </span><span class="s1">getCoreTemperature()</span><span class="s0">;</span><span class="s1">
+
+    </span><span class="s0">public void </span><span class="s1">addMedicine(Prescription product)</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">public </span><span class="s1">List getMedicine()</span><span class="s0">;</span><span class="s1">
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Patient.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span><span class="s1">
+</span><span class="s0">import </span><span class="s1">java.util.Random</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:27
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">Patient </span><span class="s0">implements </span><span class="s1">Person {
+    </span><span class="s0">private </span><span class="s1">String firstName</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">private </span><span class="s1">String lastName</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">private int </span><span class="s1">age</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">private </span><span class="s1">ArrayList&lt;Prescription&gt; productList</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">private </span><span class="s1">ArrayList&lt;Monitor&gt; attachedMonitors</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">private static </span><span class="s1">Patient instance = </span><span class="s0">null;</span><span class="s1">
+
+    </span><span class="s0">public int </span><span class="s1">heartRate</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">public int </span><span class="s1">coreTemperature</span><span class="s0">;</span><span class="s1">
+
+    </span><span class="s3">// Patients are singletons.</span><span class="s1">
+    </span><span class="s0">private </span><span class="s1">Patient(String firstName</span><span class="s0">, </span><span class="s1">String lastName</span><span class="s0">, int </span><span class="s1">age) {
+        </span><span class="s0">this</span><span class="s1">.firstName = firstName</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">this</span><span class="s1">.lastName = lastName</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">this</span><span class="s1">.age = age</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s0">this</span><span class="s1">.productList = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Prescription&gt;()</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">this</span><span class="s1">.attachedMonitors = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Monitor&gt;()</span><span class="s0">;</span><span class="s1">
+
+        </span><span class="s3">// Start simulating the patient when a patient is created.</span><span class="s1">
+        PatientEngine patientEngine = </span><span class="s0">new </span><span class="s1">PatientEngine()</span><span class="s0">;</span><span class="s1">
+        patientEngine.start()</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// this is how to access a patient.</span><span class="s1">
+    </span><span class="s3">// method is synchronized for thread safety.</span><span class="s1">
+    </span><span class="s3">// in case two people wanted to register a patient in the hospital at the same time.</span><span class="s1">
+    </span><span class="s0">public static synchronized </span><span class="s1">Patient getInstance(String firstName</span><span class="s0">, </span><span class="s1">String lastName</span><span class="s0">, int </span><span class="s1">age) {
+        </span><span class="s0">if</span><span class="s1">(instance == </span><span class="s0">null</span><span class="s1">) {
+            instance = </span><span class="s0">new </span><span class="s1">Patient(firstName</span><span class="s0">, </span><span class="s1">lastName</span><span class="s0">, </span><span class="s1">age)</span><span class="s0">;</span><span class="s1">
+        }
+        </span><span class="s0">return </span><span class="s1">instance</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Override Person interface</span><span class="s1">
+    @Override
+    </span><span class="s0">public int </span><span class="s1">getAge() {
+        </span><span class="s0">return </span><span class="s1">age</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public int </span><span class="s1">getHeartRate() {
+        </span><span class="s0">return </span><span class="s1">heartRate</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public int </span><span class="s1">getCoreTemperature() {
+        </span><span class="s0">return </span><span class="s1">coreTemperature</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public void </span><span class="s1">addMedicine(Prescription product) {
+        productList.add(product)</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public </span><span class="s1">ArrayList&lt;Prescription&gt; getMedicine() {
+        </span><span class="s0">return </span><span class="s1">productList</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s0">public </span><span class="s1">ArrayList&lt;Monitor&gt; getMonitors() {
+        </span><span class="s0">return </span><span class="s1">attachedMonitors</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Notification to all attached monitors</span><span class="s1">
+    </span><span class="s0">public void </span><span class="s1">notifyMonitors() {
+        </span><span class="s0">for </span><span class="s1">(Monitor monitor : attachedMonitors) {
+            monitor.update()</span><span class="s0">;</span><span class="s1">
+        }
+    }
+
+    </span><span class="s3">// Attaching a monitor to a patient</span><span class="s1">
+    </span><span class="s0">public void </span><span class="s1">attachMonitor(Monitor monitor) {
+        attachedMonitors.add(monitor)</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Remove a monitor from a patient</span><span class="s1">
+    </span><span class="s0">public void </span><span class="s1">detatchMonitor(Monitor monitor) {
+        attachedMonitors.remove(monitor)</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Simulate a patients vitals with random values</span><span class="s1">
+    </span><span class="s0">class </span><span class="s1">PatientEngine </span><span class="s0">extends </span><span class="s1">Thread {
+        @Override
+        </span><span class="s0">public synchronized void </span><span class="s1">run() {
+            </span><span class="s0">while </span><span class="s1">(</span><span class="s0">true</span><span class="s1">) {
+                heartRate = randomIntBetween(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">250</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+                coreTemperature = randomIntBetween(</span><span class="s4">30</span><span class="s0">, </span><span class="s4">60</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+                </span><span class="s0">try </span><span class="s1">{
+                    </span><span class="s3">// Update every 2 seconds.</span><span class="s1">
+                    sleep(</span><span class="s4">2000</span><span class="s1">)</span><span class="s0">;</span><span class="s1">
+                } </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {
+                    e.printStackTrace()</span><span class="s0">;</span><span class="s1">
+                }
+            }
+        }
+
+        </span><span class="s0">private int </span><span class="s1">randomIntBetween(</span><span class="s0">int </span><span class="s1">min</span><span class="s0">, int </span><span class="s1">max) {
+            Random rand = </span><span class="s0">new </span><span class="s1">Random()</span><span class="s0">;</span><span class="s1">
+            </span><span class="s0">return </span><span class="s1">rand.nextInt((max - min) + </span><span class="s4">1</span><span class="s1">) + min</span><span class="s0">;</span><span class="s1">
+        }
+    }
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Prescription.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 19:22
+ */</span><span class="s1">
+
+</span><span class="s0">public interface </span><span class="s1">Prescription {
+    </span><span class="s0">public </span><span class="s1">String getName()</span><span class="s0">;</span><span class="s1">
+    </span><span class="s0">public float </span><span class="s1">getPrice()</span><span class="s0">;</span><span class="s1">
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            MedicineDecorator.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created by Alan Kehoe on 19/12/2013.
+ */</span><span class="s1">
+
+</span><span class="s0">public abstract class </span><span class="s1">MedicineDecorator </span><span class="s0">implements </span><span class="s1">Prescription {
+    </span><span class="s0">public </span><span class="s1">Prescription prescription</span><span class="s0">;</span><span class="s1">
+
+    </span><span class="s3">// takes a Prescription object in the constructor</span><span class="s1">
+    </span><span class="s0">public </span><span class="s1">MedicineDecorator(Prescription prescription) {
+        </span><span class="s0">this</span><span class="s1">.prescription = prescription</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Override interface methods</span><span class="s1">
+    @Override
+    </span><span class="s0">public float </span><span class="s1">getPrice(){
+        </span><span class="s0">return </span><span class="s1">prescription.getPrice()</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public  </span><span class="s1">String getName() {
+        </span><span class="s0">return </span><span class="s1">prescription.getName()</span><span class="s0">;</span><span class="s1">
+    }
+}
+</span></pre>
+
+<<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            BodyTemperatureMedicine.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created by Alan Kehoe on 19/12/2013.
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">BodyTemperatureMedicine </span><span class="s0">extends </span><span class="s1">MedicineDecorator {
+    </span><span class="s0">public </span><span class="s1">BodyTemperatureMedicine(Prescription prescription) {
+        </span><span class="s3">// Inherit from MedicineDecorator Abstract class</span><span class="s1">
+        </span><span class="s0">super</span><span class="s1">(prescription)</span><span class="s0">;</span><span class="s1">
+    }
+
+
+    </span><span class="s3">// Override methods in MedicineDecorator</span><span class="s1">
+    @Override
+    </span><span class="s0">public float </span><span class="s1">getPrice() {
+        </span><span class="s0">float </span><span class="s1">price = (</span><span class="s0">float</span><span class="s1">) </span><span class="s4">36.23</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">return </span><span class="s1">prescription.getPrice() + price</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public </span><span class="s1">String getName() {
+        String name = </span><span class="s5">&quot; Body Temperature,&quot;</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">return </span><span class="s1">prescription.getName().concat(name)</span><span class="s0">;</span><span class="s1">
+    }
+}</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            HeartRateMedicine.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created by Alan Kehoe on 19/12/2013.
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">HeartRateMedicine </span><span class="s0">extends </span><span class="s1">MedicineDecorator {
+    </span><span class="s3">// Inherit from MedicineDecorator Abstract class</span><span class="s1">
+    </span><span class="s0">public </span><span class="s1">HeartRateMedicine(Prescription prescription) {
+        </span><span class="s0">super</span><span class="s1">(prescription)</span><span class="s0">;</span><span class="s1">
+    }
+
+    </span><span class="s3">// Override methods in MedicineDecorator</span><span class="s1">
+    @Override
+    </span><span class="s0">public float </span><span class="s1">getPrice() {
+        </span><span class="s0">float </span><span class="s1">price = (</span><span class="s0">float</span><span class="s1">) </span><span class="s4">58.76</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">return </span><span class="s1">prescription.getPrice() + price</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public </span><span class="s1">String getName() {
+        String name = </span><span class="s5">&quot; Heart Medicine,&quot;</span><span class="s0">;</span><span class="s1">
+        </span><span class="s0">return </span><span class="s1">prescription.getName().concat(name)</span><span class="s0">;</span><span class="s1">
+    }
+}
+</span></pre>
+
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+    <TR><TD><CENTER>
+        <FONT FACE="Arial, Helvetica" COLOR="#000000">
+            Medicine.java</FONT>
+    </center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">ie.computing.dcu.kehoea8</span><span class="s0">;</span><span class="s1">
+
+</span><span class="s2">/**
+ * Created with IntelliJ IDEA.
+ * User: alan
+ * Date: 25/11/2013
+ * Time: 18:30
+ */</span><span class="s1">
+
+</span><span class="s0">public class </span><span class="s1">Medicine </span><span class="s0">implements </span><span class="s1">Prescription {
+    </span><span class="s3">// All medicines carry an initial fee of 10.00</span><span class="s1">
+    @Override
+    </span><span class="s0">public </span><span class="s1">String getName() {
+        </span><span class="s0">return </span><span class="s4">&quot;Medicine Fee,&quot;</span><span class="s0">;</span><span class="s1">
+    }
+
+    @Override
+    </span><span class="s0">public float </span><span class="s1">getPrice() {
+        </span><span class="s0">return </span><span class="s1">(</span><span class="s0">float</span><span class="s1">) </span><span class="s5">10.00</span><span class="s0">;</span><span class="s1">
+    }
+}
+</span></pre>
+
+</body>
+<html>

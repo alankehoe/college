@@ -1,0 +1,79 @@
+/* app css stylesheet */
+
+.clear {
+    margin-top: 50px;
+}
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.gauge {
+    height: 250px;
+}
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 20px;
+    border-left: 3px solid #eee;
+    color: #666;
+    background: #f9f9f9
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0
+}
+
+.bs-callout-danger {
+    background-color: #fdf7f7;
+    border-color: #eed3d7;
+    color: #b94a48
+}
+
+.bs-callout-warning {
+    background-color: #faf8f0;
+    border-color: #faebcc;
+    color: #8a6d3b
+}
+
+.bs-callout-info {
+    background-color: #f4f8fa;
+    border-color: #bce8f1;
+    color: #34789a
+}
+
+.bs-callout-success {
+    background-color: #dff0d8;
+    border-color: #5cA64d;
+    color: #3c763d
+}

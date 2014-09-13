@@ -1,0 +1,18 @@
+DCU Engineering & Computing
+Assignment Submission
+
+Student Name(s):	Alan Kehoe
+Student Number(s):	10735389
+Programme:	        CASE4 - BSc in Computer Applications (Sft.Eng.)
+Project Title:	    Symmetric File Encryption Using Password and Salt
+Module code:	    CA547
+Lecturer:	        Dr. Geoff Hamilton
+Project Due Date:	18-NOV-2013
+
+
+Declaration
+
+I the undersigned declare that the project material, which I now submit, is my own work.
+Any assistance received by way of borrowing from the work of others has been cited and acknowledged within the work.
+I make this declaration in the knowledge that a breach of the rules pertaining to project submission may carry serious consequences.
+I am aware that the project will not be accepted unless this form has been handed in along with the project.
