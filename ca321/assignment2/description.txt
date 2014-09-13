@@ -1,0 +1,35 @@
+//David O'Regan 10331017
+//Alan Kehoe    10735389
+
+Description:
+
+Our program solves the problem using threads, signals and a dynamic data structure.
+
+We create a struct to be our wakeup call data type.
+
+We create a function that adds generated wake up calls onto a dynamic array.
+
+We add them at the right point by comparing against calls already in the array.
+
+Our remove thread constantly checks the current time against the time of calls.
+
+If the condition is met, the wakeup call is logged and counters are incrememted.
+
+Then we use siganls to cancel the program.
+
+Main waits for sigint, once its recived, the threads are canceled and the goodbyes are said.
+
+
+
+Scources:
+http://fydo.net/gamedev/dynamic-arrays
+http://www.algorithmist.com/index.php/Heap_sort.c
+http://www.cprogramming.com/tutorial/computersciencetheory/heapcode.html
+http://www.algolist.net/Data_structures/Binary_heap/Remove_minimum
+http://cboard.cprogramming.com/cplusplus-programming/132068-help-creating-dynamic-array-can-add-delete-elements.html
+http://forums.codeguru.com/showthread.php?445054-Warning-assignment-makes-pointer-from-integer-without-a-cast
+http://docs.oracle.com/cd/E19455-01/806-0626/6j9vgh69r/index.html
+http://msdn.microsoft.com/en-us/magazine/cc817398.aspx
+https://computing.llnl.gov/tutorials/pthreads/
+http://www.laptev.org/doc/pthreads.html
+http://www.thegeekstuff.com/2012/08/c-linked-list-example/

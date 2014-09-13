@@ -1,0 +1,25 @@
+Description:
+//David O'Regan 10331017
+//Alan Kehoe    10735389
+
+Our program solves the issue by doing the following:
+1) Reads a file from command line
+- Done using while loops, fscan and malloc to store
+
+2) Uses three threads
+- One thread to print the odd words, one thread to print even words and a final thread(main) to cordinate the ther two threads.
+
+3) After reading a word but BEFORE printing the word, a thread must sleep for a random time(1- 10000 micrseconds)
+-Done using usleep 
+
+4) Unix signals are used for thread-intercommunication
+-Done using signal sets and SIGUSR1/SIGUSR2 to link/Block & unblock threads
+
+5) Main thread cancels other threads when last word is printed
+- Done from the main thread: main
+
+6) Each cancled thread prints a goodbye message when done.
+- Done using a pthread cleanup handler i.e. push & pop
+
+*File read in will contain a random sequence of words(Strings), none being greater than 64 characters.
+-This is taken into consideration when breaking file into seperate strings(words). Done using a data struct, and dynamic memory allocation.

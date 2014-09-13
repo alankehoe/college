@@ -1,0 +1,44 @@
+  OS Assigment 1
+//David O'Regan 10331017
+//Alan Kehoe    10735389
+
+Problems encountered/faced:
+
+1) The biggest problem we faced during this assigment was a basic lack of knowlege of the C language, never having done it in any capacity.
+
+2) Major problem faced during this assigment was trying to get the I/O portion to work, reading from the file to begin with. 
+
+3) Problem faced was once the file was being read, how to break it into multiple strings instead of one long char.
+
+4) Major probelm faced was trying to get the two threads to cordinate with signals, this was by far the most difficult part of actual coding.
+
+5) Problem faced was trying to get the signals to print "Goodbye" from themsleves as opposed to printing from main.
+
+Shortcomings in solution:
+input: shortcomings(ShortComings);
+
+static void shortcomings(shortComings[5])
+{
+	int i;
+	int x = 5;
+	for(i = 0; i < x; i++)
+	{ 
+		if(shortComings[i]_contains(stuff))
+			printf(stuff);
+		else
+			printf("No shortcomings here!");
+	}
+}
+	
+Output: No shortcomings here!
+	No shortcomings here!
+	No shortcomings here!
+	No shortcomings here!
+	No shortcomings here!
+
+Only messing! Here are the real shortcomings as we see them:
+1) Main being so long, in a better coded version wtih more time we would have broken our main down into seperate functions. 
+
+2) Our origional approach used three threads and main, main was very short and tidy, only doing it this way left the program open to reading issues with reading the file properly.
+
+3)

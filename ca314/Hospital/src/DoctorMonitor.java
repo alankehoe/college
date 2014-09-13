@@ -1,0 +1,436 @@
+
+import com.mysql.jdbc.Connection;
+import java.awt.Toolkit;
+import java.security.SecureRandom;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Alan, David, Jinn, Jack
+ */
+
+public class DoctorMonitor extends javax.swing.JFrame {
+
+    Connection con = null;
+    String host = "jdbc:mysql://199.195.214.108/ca314project";
+    private String adminU = "college";
+    private String adminP = "collegeproject";
+    
+    PreparedStatement stmt = null;
+    PreparedStatement s = null;
+    ResultSet tmp = null;
+    ResultSet rs = null;
+    private SecureRandom random = new SecureRandom();
+    String name, gender, id, notes;
+    public static double age, weight, height, highTemp, lowTemp, highBPM, lowBPM, highBP, lowBP;
+    public static double highBG, lowBG;
+    
+    public static String name1, gender1, id1;
+    public static String age1, weight1, height1, highTemp1, lowTemp1, highBPM1, lowBPM1, highBP1, lowBP1;
+    public static String highBG1, lowBG1; 
+ 
+    int a = 0;
+    int size = 0;
+    
+    boolean nothing = false;
+    
+    public void setup(){
+        openConnect();
+        getQuery();
+    }
+    
+    public void openConnect() {
+        try {
+            con = (Connection) DriverManager.getConnection(host, adminU, adminP);
+            System.out.println("Connection Made");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ""
+                    + "The Server Is Offline, Contact Your Administrator If The Matter Persists",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void closeConnect() {
+        try {
+            con.close();
+            System.out.println("Connection Closed");
+        } catch (Exception e) {}
+    }
+    
+    private void getQuery() {
+        try {
+            a = 0;
+            size = 0;
+
+            stmt = con.prepareStatement("select * from patients");
+            
+            stmt.executeQuery();
+            tmp = stmt.getResultSet();
+            while (tmp.next()) {
+                size++;
+            }
+            if (size < 1) {
+                JOptionPane.showMessageDialog(this, "There Are No Patient Entries",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                retrieverecord1(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Can not get values");
+        }
+    }
+    
+
+    
+    private void retrieverecord1(int c1) {
+        try {
+
+            s = con.prepareStatement("select * from patients order by name limit ?,1");
+
+            s.setInt(1, c1);
+
+            s.executeQuery();
+            rs = s.getResultSet();
+
+            while (rs.next()) {
+                name = rs.getString("name");
+                age = rs.getDouble("age");
+                int age2 = (int) age;
+                gender = rs.getString("gender");      
+                weight = rs.getDouble("weight");
+                height = rs.getDouble("height");
+                id = rs.getString("id");
+                
+                name1 = name;
+                age1 = Integer.toString(age2);
+                gender1 = gender;
+                weight1 = Double.toString(weight);
+                height1 = Double.toString(height);
+                highTemp1 = Double.toString(rs.getDouble("highTemp"));
+                lowTemp1 = Double.toString(rs.getDouble("lowTemp"));
+                highBPM1 = Double.toString(rs.getDouble("highBPM"));
+                lowBPM1 = Double.toString(rs.getDouble("lowBPM"));
+                highBP1 = Double.toString(rs.getDouble("highBP"));
+                lowBP1 = Double.toString(rs.getDouble("lowBP"));
+                highBG1 = Double.toString(rs.getDouble("highBG"));
+                lowBG1 = Double.toString(rs.getDouble("lowBG"));
+                id1 = id;
+                
+                nameLabel.setText("Patient Name : "+ name);
+                ageLabel.setText("Patients Age : "+ age2);
+                weightLabel.setText("Patients Weight : "+ Double.toString(weight));
+                heightLabel.setText("Patients Height : "+ Double.toString(height));
+                genderLabel.setText("Patients Gender : "+ gender);
+            }
+
+            countText.setText(a + 1 + " of " + size);
+            
+        } catch (Exception e) {
+            System.out.println("Can not Create New Instance Of Driver");
+        }
+    }
+    
+    public DoctorMonitor() {
+        initComponents();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel8 = new javax.swing.JLabel();
+        BPMText = new javax.swing.JTextField();
+        BPText = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        BGText = new javax.swing.JTextField();
+        tempText = new javax.swing.JTextField();
+        genderLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        weightLabel = new javax.swing.JLabel();
+        ageLabel = new javax.swing.JLabel();
+        heightLabel = new javax.swing.JLabel();
+        startButton = new javax.swing.JButton();
+        prevButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        exitButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        countText = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PatientMonitoringSystem - Monitor");
+        setLocation(new java.awt.Point(300, 150));
+        setMaximumSize(new java.awt.Dimension(777, 532));
+        setMinimumSize(new java.awt.Dimension(777, 532));
+        setPreferredSize(new java.awt.Dimension(777, 532));
+        getContentPane().setLayout(null);
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel8.setText("mmol/l");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(420, 220, 70, 20);
+
+        BPMText.setEditable(false);
+        BPMText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        BPMText.setText("62");
+        getContentPane().add(BPMText);
+        BPMText.setBounds(100, 140, 90, 60);
+
+        BPText.setEditable(false);
+        BPText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        BPText.setText("120/45");
+        getContentPane().add(BPText);
+        BPText.setBounds(554, 140, 100, 60);
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel5.setText("Blood Pressure");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(540, 200, 130, 22);
+
+        BGText.setEditable(false);
+        BGText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        BGText.setText("5.8");
+        getContentPane().add(BGText);
+        BGText.setBounds(400, 140, 90, 60);
+
+        tempText.setEditable(false);
+        tempText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        tempText.setText("37");
+        getContentPane().add(tempText);
+        tempText.setBounds(250, 140, 90, 60);
+
+        genderLabel.setText("Patient Gender :");
+        getContentPane().add(genderLabel);
+        genderLabel.setBounds(110, 400, 310, 16);
+
+        nameLabel.setText("Patient Name :");
+        getContentPane().add(nameLabel);
+        nameLabel.setBounds(110, 280, 310, 16);
+
+        weightLabel.setText("Patient Weight :");
+        getContentPane().add(weightLabel);
+        weightLabel.setBounds(110, 340, 310, 16);
+
+        ageLabel.setText("Patient Age :");
+        getContentPane().add(ageLabel);
+        ageLabel.setBounds(110, 310, 310, 16);
+
+        heightLabel.setText("Patient Height :");
+        getContentPane().add(heightLabel);
+        heightLabel.setBounds(110, 370, 310, 16);
+
+        startButton.setText("Start Monitor");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(startButton);
+        startButton.setBounds(500, 430, 110, 29);
+
+        prevButton.setText("<< Prev");
+        prevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(prevButton);
+        prevButton.setBounds(100, 430, 94, 29);
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel6.setText("BPM");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(130, 200, 50, 22);
+
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.jpg"))); // NOI18N
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitButton);
+        exitButton.setBounds(620, 450, 100, 40);
+
+        updateButton.setText("Update Limits");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(updateButton);
+        updateButton.setBounds(370, 430, 130, 29);
+
+        nextButton.setText("Next >>");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nextButton);
+        nextButton.setBounds(270, 430, 98, 29);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 790, 60);
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel9.setText("Blood Glucose");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(390, 200, 130, 20);
+
+        countText.setEditable(false);
+        getContentPane().add(countText);
+        countText.setBounds(200, 430, 70, 28);
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel7.setText("Body Temp °C");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(240, 200, 130, 22);
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/white.jpg"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 80, 680, 420);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BigBackground.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 60, 790, 480);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        a = a + 1;
+        if (a >= size) {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "There Are No More Records");
+            a = a - 1;
+        }
+        retrieverecord1(a);
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
+        a = a - 1;
+        if (a < 0) {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "There Are No More Previous Records");
+            a = a + 1;
+        }
+        retrieverecord1(a);
+    }//GEN-LAST:event_prevButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        setVisible(false);
+        UpdateMenu up = new UpdateMenu();
+        up.setup(name1, age1, gender1, weight1, height1, highTemp1,lowTemp1,highBPM1, lowBPM1,highBP1,
+                lowBP1, highBG1, lowBG1,id1);
+        up.setVisible(true);
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        closeConnect();
+        setVisible(false);
+        Login log = new Login();
+        log.setup();
+        log.setVisible(true);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        try {
+            RunningMonitor runner = new RunningMonitor();
+            runner.run();
+        } catch (Exception ex) {
+            Logger.getLogger(DoctorMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_startButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /*
+         * Set the Nimbus look and feel
+         */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DoctorMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DoctorMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DoctorMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DoctorMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /*
+         * Create and display the form
+         */
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new DoctorMonitor().setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField BGText;
+    public static javax.swing.JTextField BPMText;
+    public static javax.swing.JTextField BPText;
+    private javax.swing.JLabel ageLabel;
+    private javax.swing.JTextField countText;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JLabel genderLabel;
+    private javax.swing.JLabel heightLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JButton prevButton;
+    private javax.swing.JButton startButton;
+    public static javax.swing.JTextField tempText;
+    private javax.swing.JButton updateButton;
+    private javax.swing.JLabel weightLabel;
+    // End of variables declaration//GEN-END:variables
+}

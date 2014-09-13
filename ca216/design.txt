@@ -1,0 +1,49 @@
+Alan Kehoe - 10735389
+David O'Regan - 10331017
+
+Design :
+
+Our program is made up of two classess:
+
+1) ChatServer
+    
+    This is our main class and is where we initialise all our new ServerThread's
+    - it contains two ArrayLists that contain the names of all the users that are connected,
+        and also the PrintWriter for all the users.
+        
+        Using PrintWriters ArrayList enables us to distribute any message quickly to every connected person using a simple "for each loop".
+        
+        In the main, the server is just waiting for new people to connect in a while true loop.
+        
+        The message saying the server is running is just to inform the person who starts the 
+        server know that everything is working fine.
+
+2) ServerThread 
+    
+    This is our thread class
+    - the idea of this is very simple.
+    
+      All we do is read in the name that is defined in the html file and add that person to our 
+      arraylist names, this enables us to keep track of how many clients are connected.
+      
+        We now print out hello "name" and add the person to the list of printwriters.
+        
+        We now display a message to every other person that the new person has connected by looping through 
+        the printwriter list this displays the message "name" has just joined to everyone except of course the 
+        person who just joined.
+        
+        Now we have entered the while(true) loop which is basically where all the chatting happens. the user
+        enters a message in the chat client it is sent to the server and is fed into a for loop where the 
+        message and the users name is printed to all the connected print writers this time including the sender 
+        aswell.
+         
+        When the client is exited by the user the thread needs to be closed and any trace of that user needs to be 
+        removed from the server.
+        
+        That user is removed from the names list and printwriters list and the new value of the 
+        amount of users is printed on the server terminal.
+        
+        Aswell a message to all connected users saying "name + has just left" is printed and of 
+        course the socket needs to be closed when the program has been exited.
+        
+        

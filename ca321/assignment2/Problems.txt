@@ -1,0 +1,14 @@
+//David O'Regan 10331017
+//Alan Kehoe    10735389
+
+Problems:
+
+1)We couldnt get the heap to implement properly and therefore our code is not as lightweight as possible
+We sort the nodes as they are added, comparing against one another on a basis.
+When one is removed the index's are shifted as they are already in order.
+
+This approach is not as optomized as a heap, but we could not get the heap to work properly.
+
+2)Neither myself or alan could implement pthread_cond_timewait in order to avoid busy waiting.
+
+We simply lacked the timing knowlage to make this method work with our program.

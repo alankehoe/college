@@ -1,0 +1,45 @@
+bill smith 3456
+jill sixpack 7654578 
+fred flintstone 835647
+donald duck 298465475
+micky mouse 0874567878
+minnie mousey 0874567878
+albert einstein 9032831
+bill smith 3456
+jill sixpack 7654578 
+fred flintstone 835647
+donald duck 298465475
+micky mouse 0874567878
+minnie mousey 0874567878
+albert einstein 9032831
+bill smith 3456
+jill sixpack 7654578 
+fred flintstone 835647
+donald duck 298465475
+micky mouse 0874567878
+minnie mousey 0874567878
+albert einstein 9032831
+bill smith 3456
+jill sixpack 7654578 
+fred flintstone 835647
+donald duck 298465475
+micky mouse 0874567878
+minnie mousey 0874567878
+albert einstein 9032831
+
+Maths 35
+Computing 125
+Stats 15
+Physics 27
+Chemistry 29
+French 54
+Engineering 53
+German 20
+Biology 56
+Law 30
+Politics 21
+Business 156
+History 42
+Philosophy 17
+Architecture 28
+Medicine 51
